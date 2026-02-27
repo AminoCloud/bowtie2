@@ -1,0 +1,31 @@
+apiVersion: aminocloud.io/v1
+kind: PipelineOperator
+metadata:
+  name: Bowtie2
+  description: "Fast and sensitive read alignment. Supports gapped, local, and paired-end alignment modes."
+  version: "2.5.3"
+  author: Ben Langmead
+  category: alignment
+  instrumentModes: [illumina]
+  tags: [alignment, mapping, bowtie]
+inputs:
+  - id: fastq_in
+    name: FASTQ Reads
+    dataType: FASTQ
+    required: true
+  - id: ref_in
+    name: Reference Genome
+    dataType: FASTA
+    required: true
+outputs:
+  - id: sam_out
+    name: Aligned SAM
+    dataType: SAM
+compute:
+  cpu: 8
+  memoryGb: 16
+  gpuRequired: false
+  estimatedMinutes: 45
+docker:
+  image: acr.aminocloud.io/aminocloud/bowtie2
+  tag: "2.5.3"
